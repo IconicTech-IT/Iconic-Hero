@@ -155,23 +155,30 @@ function ParticleSystem() {
     ctx.font = '900 140px "Arial Black", sans-serif';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('About Us', 1000, 125);
+    
+    const text = 'About Us';
+    ctx.fillText(text, 1000, 125);
 
-    // 2. Responsive Scaling Logic
+    // 2. Dynamic Scaling based on text length
+    // Shorter text gets larger scaling to fill screen appropriately
+    const textLength = text.length;
+    const lengthMultiplier = Math.max(0.5, Math.min(2, 20 / textLength)); // 10 letters = 2x, 20 letters = 1x
+    
+    // 3. Responsive Scaling Logic
     // Very conservative scaling to ensure full text is always visible on all screens
     let responsiveScale: number;
     if (size.width < 480) {
-      responsiveScale = 0.0015;
+      responsiveScale = 0.0015 * lengthMultiplier;
     } else if (size.width < 768) {
-      responsiveScale = 0.002;
+      responsiveScale = 0.002 * lengthMultiplier;
     } else if (size.width < 1280) {
-      responsiveScale = 0.0025;
+      responsiveScale = 0.0025 * lengthMultiplier;
     } else if (size.width < 1920) {
-      responsiveScale = 0.003;
+      responsiveScale = 0.003 * lengthMultiplier;
     } else if (size.width < 2560) {
-      responsiveScale = 0.0035;
+      responsiveScale = 0.0035 * lengthMultiplier;
     } else {
-      responsiveScale = 0.004;
+      responsiveScale = 0.004 * lengthMultiplier;
     }
 
     const imgData     = ctx.getImageData(0, 0, 2000, 250).data;
