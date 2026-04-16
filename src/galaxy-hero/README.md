@@ -1,4 +1,4 @@
-# Variant3AbstractInteractiveHeroV2
+# Galaxy Hero
 
 A stunning, interactive 3D hero component featuring particle-based text formation, shooting stars, and a physics-based gold mouse trail.
 
@@ -38,11 +38,11 @@ A stunning, interactive 3D hero component featuring particle-based text formatio
 ### Basic Implementation
 
 ```tsx
-import IconicHero from './Variant3AbstractInteractiveHeroV2';
+import GalaxyHero from './GalaxyHero';
 
 function App() {
   return (
-    <IconicHero />
+    <GalaxyHero />
   );
 }
 ```
@@ -53,7 +53,7 @@ The component has a fixed height of `100vh` and a dark background (`#020205`). Y
 
 ```tsx
 <div style={{ height: '500px' }}>
-  <IconicHero />
+  <GalaxyHero />
 </div>
 ```
 
@@ -142,9 +142,9 @@ const s = (1 - p.age) * 0.05; // Particle size
 ## File Structure
 
 ```
-Variant3AbstractInteractiveHeroV2/
-├── Variant3AbstractInteractiveHeroV2.tsx  # Main component
-└── README.md                                # This file
+galaxy-hero/
+├── GalaxyHero.tsx  # Main component
+└── README.md       # This file
 ```
 
 ## Technical Details

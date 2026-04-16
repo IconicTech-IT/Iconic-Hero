@@ -1,4 +1,4 @@
-# Iconic Tools - Variant3AbstractInteractiveHeroV2
+# Iconic Tools - Galaxy Hero
 
 A stunning, interactive 3D hero component featuring particle-based text formation, shooting stars, and a physics-based gold mouse trail.
 
@@ -27,10 +27,10 @@ npm run dev
 
 The main component is located at:
 ```
-src/Variant3AbstractInteractiveHeroV2/Variant3AbstractInteractiveHeroV2.tsx
+src/galaxy-hero/GalaxyHero.tsx
 ```
 
-See the component's [README](./src/Variant3AbstractInteractiveHeroV2/README.md) for detailed documentation.
+See the component's [README](./src/galaxy-hero/README.md) for detailed documentation.
 
 ## Tech Stack
 
@@ -45,8 +45,8 @@ See the component's [README](./src/Variant3AbstractInteractiveHeroV2/README.md) 
 
 ```
 src/
-├── Variant3AbstractInteractiveHeroV2/
-│   ├── Variant3AbstractInteractiveHeroV2.tsx
+├── galaxy-hero/
+│   ├── GalaxyHero.tsx
 │   └── README.md
 ├── App.tsx
 ├── main.tsx

@@ -1,7 +1,7 @@
-import Variant3AbstractInteractiveHeroV2 from './Variant3AbstractInteractiveHeroV2/Variant3AbstractInteractiveHeroV2';
+import GalaxyHero from './galaxy-hero/GalaxyHero';
 
 function App() {
-  return <Variant3AbstractInteractiveHeroV2 />;
+  return <GalaxyHero />;
 }
 
 export default App;
