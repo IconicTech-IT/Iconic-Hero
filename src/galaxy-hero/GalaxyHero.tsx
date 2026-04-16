@@ -149,39 +149,39 @@ function ParticleSystem() {
     const s = new Float32Array(count);
 
     const canvas = document.createElement('canvas');
-    canvas.width = 1000; canvas.height = 250;
+    canvas.width = 2000; canvas.height = 250;
     const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
     ctx.fillStyle = 'white';
-    ctx.font = '900 160px "Arial Black", sans-serif';
+    ctx.font = '900 140px "Arial Black", sans-serif';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('ICONIC', 500, 125);
+    ctx.fillText('INNOVATING THE FUTURE', 1000, 125);
 
     // 2. Responsive Scaling Logic
-    // Conservative scaling to ensure text fits on all screens
+    // Very conservative scaling to ensure full text is always visible on all screens
     let responsiveScale: number;
     if (size.width < 480) {
-      responsiveScale = 0.004;
+      responsiveScale = 0.0015;
     } else if (size.width < 768) {
-      responsiveScale = 0.005;
+      responsiveScale = 0.002;
     } else if (size.width < 1280) {
-      responsiveScale = 0.009;
+      responsiveScale = 0.0025;
     } else if (size.width < 1920) {
-      responsiveScale = 0.0012;
+      responsiveScale = 0.003;
     } else if (size.width < 2560) {
-      responsiveScale = 0.015;
+      responsiveScale = 0.0035;
     } else {
-      responsiveScale = 0.018;
+      responsiveScale = 0.004;
     }
 
-    const imgData     = ctx.getImageData(0, 0, 1000, 250).data;
+    const imgData     = ctx.getImageData(0, 0, 2000, 250).data;
     const validPoints: { x: number; y: number }[] = [];
     for (let y = 0; y < 250; y += 2) {
-      for (let x = 0; x < 1000; x += 2) {
-        if (imgData[(y * 1000 + x) * 4] > 128) {
+      for (let x = 0; x < 2000; x += 2) {
+        if (imgData[(y * 2000 + x) * 4] > 128) {
           // Use the responsiveScale here
           validPoints.push({ 
-            x: (x - 500) * responsiveScale, 
+            x: (x - 1000) * responsiveScale, 
             y: (125 - y) * responsiveScale 
           });
         }
