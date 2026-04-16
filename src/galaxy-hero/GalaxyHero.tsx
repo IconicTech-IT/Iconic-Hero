@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useLayoutEffect } from 'react';
 import { Canvas, useFrame, useThree, extend } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -379,6 +379,34 @@ function MouseTrail() {
   );
 }
 
+// ─── RESPONSIVE CAMERA ───────────────────────────────────────────────────────
+function ResponsiveCamera({ children }: { children: React.ReactNode }) {
+  const { camera, size } = useThree();
+  
+  useLayoutEffect(() => {
+    // Adjust camera based on screen size to ensure text is always visible
+    const perspectiveCamera = camera as THREE.PerspectiveCamera;
+    
+    if (size.width < 768) {
+      // Mobile: move camera back and increase FOV to fit text
+      perspectiveCamera.position.z = 8;
+      perspectiveCamera.fov = 50;
+    } else if (size.width < 1024) {
+      // Tablet: medium adjustments
+      perspectiveCamera.position.z = 7;
+      perspectiveCamera.fov = 45;
+    } else {
+      // Desktop: original settings
+      perspectiveCamera.position.z = 6;
+      perspectiveCamera.fov = 40;
+    }
+    
+    perspectiveCamera.updateProjectionMatrix();
+  }, [size.width, size.height, camera]);
+  
+  return <>{children}</>;
+}
+
 // ─── ROOT EXPORT ──────────────────────────────────────────────────────────────
 export default function IconicHero() {
   return (
@@ -388,16 +416,17 @@ export default function IconicHero() {
         dpr={[1, 2]}
         gl={{ antialias: true, stencil: false, powerPreference: "high-performance" }}
       >
-        <color attach="background" args={['#020205']} />
-        
-        <group>
-          <StarField />
-          <ShootingStars />
-          <ParticleSystem />
-          <MouseTrail />
-        </group>
+        <ResponsiveCamera>
+          <color attach="background" args={['#020205']} />
+          
+          <group>
+            <StarField />
+            <ShootingStars />
+            <ParticleSystem />
+            <MouseTrail />
+          </group>
 
-        <EffectComposer enableNormalPass={false}>
+          <EffectComposer enableNormalPass={false}>
           <Bloom 
             luminanceThreshold={0.2} 
             mipmapBlur 
@@ -407,6 +436,7 @@ export default function IconicHero() {
           <Noise opacity={0.04} />
           <Vignette eskil={false} offset={0.05} darkness={1.3} />
         </EffectComposer>
+        </ResponsiveCamera>
       </Canvas>
       
       <div style={{
