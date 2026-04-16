@@ -155,7 +155,7 @@ function ParticleSystem() {
     ctx.font = '900 140px "Arial Black", sans-serif';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('INNOVATING THE FUTURE', 1000, 125);
+    ctx.fillText('About Us', 1000, 125);
 
     // 2. Responsive Scaling Logic
     // Very conservative scaling to ensure full text is always visible on all screens
