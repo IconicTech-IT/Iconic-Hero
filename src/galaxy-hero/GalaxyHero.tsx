@@ -158,8 +158,15 @@ function ParticleSystem() {
     ctx.fillText('ICONIC', 500, 125);
 
     // 2. Responsive Scaling Logic
-    // Mobile: smaller scale (0.008), Desktop: medium scale (0.011)
-    const responsiveScale = size.width < 768 ? 0.008 : 0.011;
+    // Small mobile: very small scale (0.005), Mobile: small scale (0.007), Desktop: medium scale (0.011)
+    let responsiveScale: number;
+    if (size.width < 480) {
+      responsiveScale = 0.005;
+    } else if (size.width < 768) {
+      responsiveScale = 0.007;
+    } else {
+      responsiveScale = 0.011;
+    }
 
     const imgData     = ctx.getImageData(0, 0, 1000, 250).data;
     const validPoints: { x: number; y: number }[] = [];
@@ -387,13 +394,17 @@ function ResponsiveCamera({ children }: { children: React.ReactNode }) {
     // Adjust camera based on screen size to ensure text is always visible
     const perspectiveCamera = camera as THREE.PerspectiveCamera;
     
-    if (size.width < 768) {
+    if (size.width < 480) {
+      // Small mobile: move camera back significantly and increase FOV
+      perspectiveCamera.position.z = 12;
+      perspectiveCamera.fov = 60;
+    } else if (size.width < 768) {
       // Mobile: move camera back and increase FOV to fit text
-      perspectiveCamera.position.z = 8;
-      perspectiveCamera.fov = 50;
+      perspectiveCamera.position.z = 10;
+      perspectiveCamera.fov = 55;
     } else if (size.width < 1024) {
       // Tablet: medium adjustments
-      perspectiveCamera.position.z = 7;
+      perspectiveCamera.position.z = 8;
       perspectiveCamera.fov = 45;
     } else {
       // Desktop: original settings
