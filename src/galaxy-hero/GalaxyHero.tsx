@@ -168,8 +168,10 @@ function ParticleSystem() {
       responsiveScale = 0.009;
     } else if (size.width < 1920) {
       responsiveScale = 0.0012;
-    } else {
+    } else if (size.width < 2560) {
       responsiveScale = 0.015;
+    } else {
+      responsiveScale = 0.018;
     }
 
     const imgData     = ctx.getImageData(0, 0, 1000, 250).data;
