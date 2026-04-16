@@ -202,9 +202,9 @@ function ParticleSystem() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position"       count={count} array={pos} itemSize={3} />
-        <bufferAttribute attach="attributes-targetPosition" count={count} array={tar} itemSize={3} />
-        <bufferAttribute attach="attributes-staggerDelay"   count={count} array={stg} itemSize={1} />
+        <bufferAttribute attach="attributes-position"       count={count} args={[pos, 3]} />
+        <bufferAttribute attach="attributes-targetPosition" count={count} args={[tar, 3]} />
+        <bufferAttribute attach="attributes-staggerDelay"   count={count} args={[stg, 1]} />
       </bufferGeometry>
       {/* @ts-ignore */}
       <pricelessMaterial ref={matRef} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
@@ -239,9 +239,9 @@ function StarField() {
   return (
     <points>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={STARS} array={positions} itemSize={3} />
-        <bufferAttribute attach="attributes-aSize"    count={STARS} array={sizes}     itemSize={1} />
-        <bufferAttribute attach="attributes-aTwinkle" count={STARS} array={twinkles}  itemSize={1} />
+        <bufferAttribute attach="attributes-position" count={STARS} args={[positions, 3]} />
+        <bufferAttribute attach="attributes-aSize"    count={STARS} args={[sizes, 1]} />
+        <bufferAttribute attach="attributes-aTwinkle" count={STARS} args={[twinkles, 1]} />
       </bufferGeometry>
       {/* @ts-ignore */}
       <starMaterial ref={matRef} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
@@ -295,8 +295,8 @@ function ShootingStar({ startDelay, color }: ShootingStarProps) {
   return (
     <line ref={lineRef as any}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position"   count={SEGMENTS + 1} array={positions}  itemSize={3} />
-        <bufferAttribute attach="attributes-aAlongTail" count={SEGMENTS + 1} array={aAlongTail} itemSize={1} />
+        <bufferAttribute attach="attributes-position"   count={SEGMENTS + 1} args={[positions, 3]} />
+        <bufferAttribute attach="attributes-aAlongTail" count={SEGMENTS + 1} args={[aAlongTail, 1]} />
       </bufferGeometry>
       {/* @ts-ignore */}
       <shootingStarMaterial ref={matRef} transparent depthWrite={false} blending={THREE.AdditiveBlending} uColor={color} />
@@ -342,7 +342,7 @@ function MouseTrail() {
   const dummy = new THREE.Object3D();
   const tempVec = new THREE.Vector3();
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     // 1. Get Mouse World Pos
     tempVec.set(mouse.x, mouse.y, 0.5).unproject(camera);
     const dir = tempVec.sub(camera.position).normalize();
